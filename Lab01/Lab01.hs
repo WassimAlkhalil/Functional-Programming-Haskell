@@ -1,6 +1,7 @@
 -- Author : Wassim Alkhalil
+---------------------------
 -- Task 1
-
+---------
 {-
 a. take 3 ['P','F','f','u','n']
 "nuf"
@@ -59,7 +60,7 @@ h. drop 2 (reverse ['n','u','f','F','P'])
 -}
   ---------------------------------------------
 -- Task 2
-
+---------
 xs = [4,1] 
 ys = [3,2]
 
@@ -79,7 +80,7 @@ ns = quickSort(xs ++ ys)
 hs = drop 1 xs ++ take 2 (reverse(xs ++ ys)) ++ take 1 (xs ++ ys) 
   ---------------------------------------------
 -- Task 3 
-
+---------
 -- we can use the short form [3,6 .. 99]
 
 -- list comprehension
@@ -93,6 +94,7 @@ divisibality_2 (x:xs) | x `mod` 3 == 0 = x : divisibality_2 xs
                       | otherwise = divisibality_2 xs
   ---------------------------------------------
 -- Task 4
+---------
 -- a.
 -- [] represents empty list
 -- [[]] represents a list with an empty list as its only element
