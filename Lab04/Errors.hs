@@ -1,8 +1,10 @@
 import Test.QuickCheck
 
 -- Author: Wassim Alkhalil
+--------------------------
 
 -- Task 1
+---------
 -- the symbole -> separates the function argument from the function body
 -- the namless function x takes an integer and returns a function that takes an integer and the function body is the sum of the two integers.
 add :: Int -> (Int -> Int)
@@ -20,7 +22,7 @@ quadruple x = mult 2 x * 2
                   mult n m = m + mult (n-1) m
 --------------------------------
 -- Task 2
-    ----------
+----------
 -- to generate a list of integers that decreases in value using the [x .. y] syntax in Haskell will result always an empty list. [99 .. 1] = [] 
 -- but, the [3,2 .. -3] expression will result [3,2,1,0,-1,-2,-3].
     ----------
@@ -52,6 +54,7 @@ repeatc n xs = [x | i <- [1..n], x <- xs]
 prop_repeatc_repeat n xs = repeatc n xs == concat(replicate n xs)
 --------------------------------
 -- Task 3
+---------
 -- CONTRACT
 factors :: Int -> [Int]
 -- PURPOSE
@@ -90,6 +93,7 @@ numPrimes x = length[ i | i <- factors x, i <= x]
 prop_numPrimes_length x = numPrimes x == length[ i | i <- factors x, i <= x]
 --------------------------------
 -- Task 4
+---------
 -- CONTRACT
 scalarProduct :: [Int] -> [Int] -> Int
 -- PURPOSE
@@ -106,6 +110,7 @@ scalarProduct xs ys = if length xs /= length ys then error "the length of the fi
 prop_scalarProduct_calculation xs ys = scalarProduct xs ys == product[x*y | x <- xs, y <- ys]                                                                                                                                                                                       
 --------------------------------
 -- Task 5
+---------
 -- CONTRACT
 nestedRemoveEven :: [[Int]] -> [[Int]]
 -- PURPOSE
