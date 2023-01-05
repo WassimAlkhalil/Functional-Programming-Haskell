@@ -69,6 +69,7 @@ example_double_1 = double [] == []
 -- DEFINITION
 double xs = map (\x -> x * x) [x | x <- filter even xs ]
 -- or we can use : double xs = [ x * x | x <- filter even xs] 
+-- or we can use : double xs = map (^2) (filter even xs)
 
 -- TESTS
 prop_double_square xs = double xs == [ x*x | x <- xs, even x ]
@@ -85,6 +86,12 @@ example_foo_0 = foo [1,2,3,4,5] == [3,4,5,6,7]
 example_foo_1 = foo [] == []
 -- DEFINITION
 foo xs = map (+1) (map (+1) xs)
+{-
+foo2 [1,2,3] = map (+1) (map (+1) xs)
+1. map (+1) (map (+1) [1,2,3])
+2. map (+1) [2,3,4]
+3. [3,4,5]
+-}
 -- TESTS
 prop_foo_map xs = foo xs == [ y | x <- xs, let y = x + 2]
                 ---------------------
@@ -97,6 +104,13 @@ example_bar_0 = bar [1..20] == 5
 example_bar_1 = bar [] == 0
 -- DEFINITION
 bar xs = sum (map (\_ -> 1) (filter (>7) (filter (<13) xs)))
+{-
+bar [1..10] = sum (map (\_ -> 1) (filter (> 7) (filter (< 13) [1..10])))
+1. sum (map (\_ -> 1) (filter (> 7) ([1..10])))
+2. sum (map (\_ -> 1) ([8,9,10]))
+3. sum [1,1,1]
+4. 3
+-}
 -- TEST
 prop_bar_counter xs = bar xs == sum[ 1 | x <- xs, x > 7 && x < 13]
                 ---------------------
@@ -111,6 +125,11 @@ example_baz_0 = baz [[]] == [[]]
 example_baz_1 = baz [[1,2,3], [4,5,6]] == [[2,3,4],[5,6,7]]
 -- DEFINITION
 baz xss = map (map (+1)) xss
+{-
+map (map(+1)) [[1,2,3],[2,3,4]] 
+1. [map (+1) [1,2,3], map (+1) [2,3,4]]
+2. [[2,3,4],[3,4,5]]
+-}
 -- TESTS
 prop_baz_map xss = baz xss == [ helper xs | xs <- xss]
                                         where 
@@ -119,23 +138,26 @@ prop_baz_map xss = baz xss == [ helper xs | xs <- xss]
 -- Task 5
 -- a.
 {-
-foldl (-) 0 [1,2,3]
-foldl (-) (0-1) [2,3]
-foldl (-) ((0-1)-2) [3]
-foldl (-) (((0-1)-2)-3) []
-(((-1)-2)-3)
-((-3)-3) 
--6
+1. foldl (-) 0 [1,2,3]
+2. foldl (-) (0-1) [2,3]
+3. foldl (-) ((0-1)-2) [3]
+4. foldl (-) (((0-1)-2)-3) []
+5. (((-1)-2)-3)
+6. ((-1-2)-3)
+7. (-3-3)
+8. -6
 -}
                 ---------------------
 -- b.
 {-
-foldr (-) 0 [1,2,3]
-1 - (foldr [2,3])
-1 - (2 - (foldr [3]))
-1 - (2 - (3 - foldr []))
-1 - (2 - (3 - 0))
-2
+1. foldr (-) 0 [1,2,3]
+2. 1 - (foldr (-) 0 [2,3])
+3. 1 - (2 - (foldr (-) 0 [3]))
+4. 1 - (2 - (3 - (foldr (-) 0 [])))
+5. 1 - (2 - (3 - 0))
+6. 1 - (2 - 3)
+7. 1 - (-1) 
+8. 2
 
 -- or we can do it in this way :
 
