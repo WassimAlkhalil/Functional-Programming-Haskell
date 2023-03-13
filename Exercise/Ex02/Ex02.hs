@@ -96,6 +96,9 @@ myTailCond :: [a] -> [a]
 
 -- DEFINITION [TODO]
 myTailCond xs  = if null xs then [] else tail xs
+-- null :: Foldable t => t a -> Bool
+-- null is a function that checks if a list is empty or not
+-- if the list is empty, the function returns True else False
 
 --------------------------------------------------------------------------------
 -- CONTRACT [TODO]
