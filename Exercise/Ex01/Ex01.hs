@@ -126,8 +126,9 @@ question2 foo bar baz = reverseString foo
 -- DEFINITION
 question3 :: p -> String -> String -> String
 question3 foo bar baz = appendString (appendString (takeCharacters 1 bar )(dropCharacters 7 bar)) (dropCharacters 7 baz)
-
+-- other solution : question3 foo bar baz = takeCharacters 1 bar ++ dropCharacters 6 baz
 --------------------------------------------------------------------------------
 -- DEFINITION
 question4 :: [Char] -> String -> String -> String
 question4 foo bar baz = appendString (question3 foo bar baz)(dropCharacters 4 (reverseString foo))
+-- other solution : question3 foo bar baz ++ dropCharacters 4 (question2 foo bar baz)
