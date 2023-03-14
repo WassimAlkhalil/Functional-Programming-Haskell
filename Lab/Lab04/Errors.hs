@@ -106,6 +106,14 @@ scalarProdut [] [] = 0
 scalarProduct _ [] = 0
 scalarProduct [] _ = 0
 scalarProduct xs ys = if length xs /= length ys then error "the length of the first list must be equal to the length of the second list" else sum[x*y | (x,y) <- zip xs ys]
+
+-- other solution 
+{-
+scalarProduct :: [Int] -> [Int] -> Int
+scalarProduct xs ys = if length xs /= length ys || null xs == True || null ys == True
+                          then error "the two lists should have the same length" 
+                              else sum[x*y|(x,y) <- zip xs ys]
+-}
 -- TEST
 prop_scalarProduct_calculation xs ys = scalarProduct xs ys == product[x*y | x <- xs, y <- ys]                                                                                                                                                                                       
 --------------------------------
@@ -121,6 +129,16 @@ example_nestedRemoveEven_0 xss = nestedRemoveEven [[1,2,3],[4,5,6],[7,8,9]] == [
 example_nestedRemoveEven_1 xss = nestedRemoveEven [[-1,3,2],[4,-5,-6]] == [[-1,3], [-5]]
 -- DEFINITION
 nestedRemoveEven xss = [filter odd xs | xs <- xss]
+
+-- other solution 
+{-
+odd' :: [Int] -> [Int]
+odd' [] = []
+odd' xs = [ x |x <- xs, x `mod` 2 == 1]
+
+nestedRemoveEven :: [[Int]] -> [[Int]]
+nestedRemoveEven xss = map (odd') xss
+-}
 -- TEST
 prop_nestedRemoveEven_filter xss = nestedRemoveEven xss == [helper xs | xs <- xss]
                                                                 where 
