@@ -47,3 +47,7 @@ data Error a = Error {
     result :: Maybe a 
 } deriving Show
 ----------------------------------------------------
+-- Task 5
+---------
+bindE :: Error a -> (a -> Error b) -> Error b
+bindE (Error id description Nothing) f = Error id description Nothing
